@@ -1,6 +1,7 @@
-
 import "./globals.css";
 import Link from "next/link";
+import Image from "next/image";
+
 
 export default function RootLayout({
   children,
@@ -10,7 +11,9 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body>
-        <div>가려움없는세상</div>
+        <div>
+        <Image src="/logo.png" width={300} height={64} alt="logo" />
+        </div>
         <div>
           <Link href="/">BEST</Link>
           <Link href="/lotion">보습제</Link>
