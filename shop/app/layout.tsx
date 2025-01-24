@@ -11,7 +11,7 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body>
-        <header className="border-b-2 mb-8 border-black">
+        <header className="border-b-2 mb-8 border-gray-500">
           <div className="flex justify-center items-center mt-12">
             <Image src="/logo.png" width={300} height={64} alt="logo" />
           </div>
