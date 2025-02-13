@@ -9,7 +9,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko">
+    <html lang="ko"
+    suppressHydrationWarning>
       <body>
         <header className="border-b-2 mb-8 border-gray-500">
           <div className="flex justify-center items-center mt-12">
