@@ -22,6 +22,7 @@ export default function Card({productImg, productName, rating}: CardProps) {
             </div>
 
         <h2 className="text-lg font-semibold mb-1">{productName}</h2>
+        <div>{rating}</div>
         
         </div>
 );
