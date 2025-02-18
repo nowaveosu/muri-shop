@@ -1,7 +1,7 @@
 
 import Card from "../components/Card";
 import { MongoClient } from "mongodb"
-
+import Link from "next/link";
 
 
 export default async function Lotion() {
@@ -18,14 +18,19 @@ export default async function Lotion() {
   return (
     <div className="flex flex-wrap gap-4 p-4">
       {lotions.map((item) => (
-        <Card
-          key={item._id.toString()}           
-          productImg={item.image}            
-          productName={item.name}             
-          rating={Number(item.star)}
-        />
+        <Link
+          key = {item._id.toString()}
+          href = {`/lotion/${item._id.toString()}`}
+        >
+          <Card
+            key={item._id.toString()}           
+            productImg={item.image}            
+            productName={item.name}             
+            rating={Number(item.star)}
+          />        
+        </Link>
+
       ))}
     </div>
     );
   }
-  
