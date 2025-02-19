@@ -1,14 +1,21 @@
 import { MongoClient, ObjectId } from "mongodb"
 import Image from "next/image"
 
-export default async function LotionDetailPage({params,}: {params: {id:string}}){
+export default async function LotionDetailPage({
+    params,
+    }: {
+        params: Promise<{id:string}>
+    }) {
+    
+    const {id} = await params;
+
     const client = new MongoClient(process.env.MONGODB_URI as string);
     await client.connect();
 
     const db = client.db("products");
     const collection = db.collection("lotion");
 
-    const product = await collection.findOne({ _id: new ObjectId(params.id)});
+    const product = await collection.findOne({ _id: new ObjectId(id)});
 
     await client.close();
 
