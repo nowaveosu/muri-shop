@@ -5,15 +5,16 @@ const uri = process.env.MONGODB_URI as string;
 
 export async function GET(
     request: NextRequest,
-    {params} : {params: {productId: string}}
+    {params} : {params: Promise<{ productId: string }> }
 ){
+    const {productId} = await params;
     const client = new MongoClient(uri);
     await client.connect();
 
     const db = client.db("products");
     const collection = db.collection("comments");
 
-    const productObjectId = new ObjectId(params.productId);
+    const productObjectId = new ObjectId(productId);
     const comments = await collection
         .find({ productId: productObjectId })
         .sort({ createdAT: -1 })
@@ -26,8 +27,9 @@ export async function GET(
 
 export async function POST(
     request: NextRequest,
-    {params} : {params: {productId: string}}
+    {params} : {params: Promise<{ productId: string }> }
 ){
+    const {productId} = await params;
     const {author, content} = await request.json();
     const client = new MongoClient(uri);
     await client.connect();
@@ -35,7 +37,7 @@ export async function POST(
     const db = client.db("products");
     const collection = db.collection("comments");
 
-    const productObjectId = new ObjectId(params.productId);
+    const productObjectId = new ObjectId(productId);
 
     const newComment = {
         productId: productObjectId,
