@@ -1,4 +1,4 @@
-import BoardList from "../../components/BoardList";
+import BoardList from "@/app/components/BoardList";
 
 export default function BoardPage() {
 
