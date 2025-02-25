@@ -24,6 +24,9 @@ export default function RootLayout({
               <Link href="/lotion">보습제</Link>
               <Link href="/tonic">영양제</Link>
               <Link href="/board">게시판</Link>
+              <Link href="/auth/login" className="text-blue-500 underline">
+                로그인
+              </Link>
             </nav>
           </header>
 
