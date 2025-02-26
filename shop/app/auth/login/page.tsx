@@ -40,7 +40,7 @@ export default function LoginPage() {
         <form onSubmit={handleSubmit} className="flex flex-col space-y-3">
             <input
             type="text"
-            placeholder="아이디(이메일)"
+            placeholder="이메일"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="border rounded p-2"
