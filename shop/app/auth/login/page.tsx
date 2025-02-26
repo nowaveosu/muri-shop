@@ -2,36 +2,29 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useDispatch, useSelector } from "react-redux";
+import { loginThunk } from "@/app/redux/features/authSlice";
+import type { AppDispatch, RootState } from "@/app/redux/store";
 
 export default function LoginPage() {
     const router = useRouter();
+    const dispatch = useDispatch<AppDispatch>();
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    const { status, errorMessage, user } = useSelector((state: RootState) => state.auth);
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (!email || !password) {
-        alert("아이디와 비밀번호를 입력하세요.");
-        return;
-        }
 
-        const res = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-        });
-
-        if (!res.ok) {
-        const errorData = await res.json();
-        alert(errorData.message || "로그인 실패");
-        return;
-        }
-
-        alert("로그인 성공!");
-
+        try {
+        await dispatch(loginThunk({ email, password })).unwrap();
+        alert("로그인 성공");
         router.push("/");
+        } catch (err: any) {
+        alert(err.message || "로그인 실패");
+        }
     };
 
     return (
@@ -40,7 +33,7 @@ export default function LoginPage() {
         <form onSubmit={handleSubmit} className="flex flex-col space-y-3">
             <input
             type="text"
-            placeholder="이메일"
+            placeholder="아이디(이메일)"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="border rounded p-2"
@@ -55,10 +48,15 @@ export default function LoginPage() {
             <button
             type="submit"
             className="bg-blue-500 text-white py-2 rounded mt-2"
+            disabled={status === "loading"}
             >
-            로그인
+            {status === "loading" ? "로그인 중..." : "로그인"}
             </button>
         </form>
+
+        {errorMessage && (
+            <p className="text-red-500 mt-2">{errorMessage}</p>
+        )}
 
         <p className="mt-4">
             아직 회원이 아니신가요?{" "}
