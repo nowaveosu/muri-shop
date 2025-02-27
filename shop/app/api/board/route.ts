@@ -22,7 +22,7 @@ export async function GET() {
     }
 
     export async function POST(request: NextRequest) {
-    const { title, category, content } = await request.json();
+    const { author,title, category, content } = await request.json();
 
     if (!title || !category || !content) {
         return NextResponse.json(
@@ -47,6 +47,7 @@ export async function GET() {
     const collection = db.collection("board");
 
     const newBoard = {
+        author,
         title,
         category,
         content,

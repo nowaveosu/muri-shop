@@ -4,6 +4,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 interface BoardItem {
     _id: string;
+    author: string;
     title: string;
     category: string;
     content: string;
@@ -44,10 +45,12 @@ export const fetchBoardDetail = createAsyncThunk(
 export const createBoard = createAsyncThunk(
     "board/create",
     async ({
+        author,
         title,
         category,
         content,
     }: {
+        author: string,
         title: string;
         category: string;
         content: string;
@@ -55,7 +58,7 @@ export const createBoard = createAsyncThunk(
         const res = await fetch("/api/board", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ title, category, content }),
+        body: JSON.stringify({ title, category, content, author }),
         });
         if (!res.ok) {
         const errorData = await res.json();

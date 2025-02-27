@@ -32,23 +32,24 @@ export default function BoardList() {
 
         <ul className="mt-4 space-y-2">
             {list.map((item) => (
-            <li
-                key={item._id}
-                className="border p-2 rounded flex justify-between items-center"
-            >
-                <div>
-                <span className="text-sm text-gray-500 mr-2">
-                    [{item.category}]
-                </span>
-                <span>{item.title}</span>
-                </div>
                 <Link
                 href={`/board/${item._id}`}
-                className="text-blue-500 hover:underline"
-                >
-                보기
+                key={item._id}>
+                    <li
+                        key={item._id}
+                        className="border p-2 rounded flex justify-between items-center"
+                    >
+                        <div>
+                        <span className="text-sm text-gray-500 mr-2">
+                            [{item.category}]
+                        </span>
+                        <span>{item.title}</span>
+                        <span>{item.author}</span>
+                        </div>
+                        
+                    </li>
                 </Link>
-            </li>
+
             ))}
         </ul>
         </div>

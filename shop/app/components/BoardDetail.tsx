@@ -33,6 +33,9 @@ export default function BoardDetail() {
             [{detail.category}] {detail.title}
         </h2>
         <p className="text-gray-600 text-sm mb-4">
+            작성자: {detail.author}
+        </p>
+        <p className="text-gray-600 text-sm mb-4">
             작성일: {new Date(detail.createdAt).toLocaleString()}
         </p>
         <div className="border p-4 mb-6">{detail.content}</div>

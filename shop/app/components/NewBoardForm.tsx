@@ -8,17 +8,35 @@ import { useRouter } from "next/navigation";
 
 export default function NewBoardForm() {
     const [title, setTitle] = useState("");
-    const [category, setCategory] = useState("꿀팁"); 
+    const [category, setCategory] = useState("꿀팁");
     const [content, setContent] = useState("");
+
     const dispatch = useDispatch<AppDispatch>();
     const router = useRouter();
 
-    const { status, errorMessage } = useSelector((state: RootState) => state.board);
+    const user = useSelector((state: RootState) => state.auth.user);
+
+    const { status, errorMessage } = useSelector(
+        (state: RootState) => state.board
+    );
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+
+        const finalAuthor = user
+        ? user.email.split("@")[0]
+        : "익명";
+
         try {
-        await dispatch(createBoard({ title, category, content })).unwrap();
+        await dispatch(
+            createBoard({
+            title,
+            category,
+            content,
+            author: finalAuthor,
+            })
+        ).unwrap();
+
         alert("게시글이 등록되었습니다.");
         router.push("/board");
         } catch (error: any) {
