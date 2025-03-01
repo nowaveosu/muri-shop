@@ -21,7 +21,6 @@ export default function Header() {
       </div>
 
       <nav className="mt-9 mb-6 flex justify-center space-x-40 text-lg">
-        <Link href="/">BEST</Link>
         <Link href="/lotion">보습제</Link>
         <Link href="/tonic">영양제</Link>
         <Link href="/board">게시판</Link>
