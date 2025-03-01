@@ -37,16 +37,16 @@ export default function BoardList() {
                 key={item._id}>
                     <li
                         key={item._id}
-                        className="border p-2 rounded flex justify-between items-center"
+                        
+                        className="border p-2 mb-1 rounded flex justify-between items-center cursor-pointer hover:bg-gray-100"
                     >
                         <div>
-                        <span className="text-sm text-gray-500 mr-2">
-                            [{item.category}]
-                        </span>
+                        <span className="text-sm text-gray-500 mr-2">[{item.category}]</span>
                         <span>{item.title}</span>
-                        <span>{item.author}</span>
                         </div>
-                        
+                        <div className="text-sm text-gray-600">
+                        작성자: {item.author ?? "익명"}
+                        </div>
                     </li>
                 </Link>
 
