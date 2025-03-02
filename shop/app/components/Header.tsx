@@ -15,7 +15,7 @@ export default function Header() {
   };
 
   return (
-    <header className="border-b-2 mb-8 border-gray-500">
+    <header className=" mb-8 pb-2 shadow-lg">
       <div className="flex justify-center items-center mt-12">
         <Image src="/logo.png" width={300} height={64} alt="logo" />
       </div>
