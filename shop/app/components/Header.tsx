@@ -26,11 +26,11 @@ export default function Header() {
         <Link href="/board">게시판</Link>
 
         {user ? (
-          <button onClick={handleLogout} className="text-blue-500 underline">
+          <button onClick={handleLogout} className="text-blue-500">
             로그아웃
           </button>
         ) : (
-          <Link href="/auth/login" className="text-blue-500 underline">
+          <Link href="/auth/login" className="text-blue-500">
             로그인
           </Link>
         )}
