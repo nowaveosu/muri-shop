@@ -16,7 +16,7 @@ export default async function Lotion() {
   await client.close();
 
   return (
-    <div className="flex flex-wrap gap-4 p-4">
+    <div className="flex flex-wrap gap-4 p-4 justify-center ">
       {lotions.map((item) => (
         <Link
           key = {item._id.toString()}
