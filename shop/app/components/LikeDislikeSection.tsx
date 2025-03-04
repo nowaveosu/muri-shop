@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import type { RootState } from "../redux/store";
 
 interface LikeDislikeProps {
+  routePrefix: string;
   productId: string;
   likes: number;
   dislikes: number;
@@ -13,6 +14,7 @@ interface LikeDislikeProps {
 }
 
 export default function LikeDislikeSection({
+  routePrefix, 
   productId,
   likes,
   dislikes,
@@ -25,7 +27,6 @@ export default function LikeDislikeSection({
   const [localDislikes, setLocalDislikes] = useState(dislikes);
 
   const userId = user?.id;
-
   const userAlreadyLiked = userId ? likedBy.includes(userId) : false;
   const userAlreadyDisliked = userId ? dislikedBy.includes(userId) : false;
 
@@ -34,17 +35,17 @@ export default function LikeDislikeSection({
       alert("로그인 후 사용가능한 기능입니다");
       return;
     }
-
     if (userAlreadyLiked || userAlreadyDisliked) {
       alert("이미 투표했습니다");
       return;
     }
 
-    const res = await fetch(`/api/lotion/${productId}/like`, {
+    const res = await fetch(`/api/${routePrefix}/${productId}/like`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ userId }),
     });
+
     if (res.ok) {
       setLocalLikes((prev) => prev + 1);
     } else {
@@ -61,11 +62,13 @@ export default function LikeDislikeSection({
       alert("이미 투표했습니다");
       return;
     }
-    const res = await fetch(`/api/lotion/${productId}/dislike`, {
+
+    const res = await fetch(`/api/${routePrefix}/${productId}/dislike`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ userId }),
     });
+
     if (res.ok) {
       setLocalDislikes((prev) => prev + 1);
     } else {
@@ -75,7 +78,6 @@ export default function LikeDislikeSection({
 
   return (
     <div className="my-4">
-
       <button
         className="text-xl text-yellow-600 mr-2 px-2 py-1"
         onClick={handleLike}
