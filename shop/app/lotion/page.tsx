@@ -27,6 +27,7 @@ export default async function Lotion() {
             productImg={item.image}            
             productName={item.name}             
             likes={item.likes}
+            dislikes={item.dislikes}
           />        
         </Link>
 
