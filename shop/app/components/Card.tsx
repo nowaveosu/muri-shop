@@ -1,13 +1,14 @@
+import { Double, Int32 } from "mongodb";
 import Image from "next/image"
 
 interface CardProps {
     productImg: string;
     productName: string;
-    rating: number;
+    likes: number;
 }
 
 
-export default function Card({productImg, productName, rating}: CardProps) {
+export default function Card({productImg, productName, likes}: CardProps) {
     return (
         <div className="w-64 border border-gray-300 rounded-md shadow-sm p-4 flex flex-col items-center">
 
@@ -22,7 +23,7 @@ export default function Card({productImg, productName, rating}: CardProps) {
             </div>
 
         <h2 className="text-lg font-semibold mb-1">{productName}</h2>
-        <div>{rating}</div>
+        <div className="text-yellow-600">👍 {likes}</div>
         
         </div>
 );

@@ -26,7 +26,7 @@ export default async function Lotion() {
             key={item._id.toString()}           
             productImg={item.image}            
             productName={item.name}             
-            rating={Number(item.star)}
+            likes={item.likes}
           />        
         </Link>
 
