@@ -22,8 +22,7 @@ export default async function Lotion() {
           key = {item._id.toString()}
           href = {`/lotion/${item._id.toString()}`}
         >
-          <Card
-            key={item._id.toString()}           
+          <Card       
             productImg={item.image}            
             productName={item.name}             
             likes={item.likes}

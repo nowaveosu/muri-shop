@@ -24,5 +24,7 @@ export async function POST(request: NextRequest) {
     }
 
     await client.close();
-    return NextResponse.json({ message: "로그인 성공" }, { status: 200 });
+    return NextResponse.json({       
+        id: user._id.toString(),
+        email: user.email, }, { status: 200 });
 }

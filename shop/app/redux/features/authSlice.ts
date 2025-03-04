@@ -3,6 +3,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 interface User {
+    id: string;
     email: string;
 }
 
@@ -31,8 +32,8 @@ export const loginThunk = createAsyncThunk(
         const errorData = await res.json();
         throw new Error(errorData.message || "로그인 실패");
         }
-
-        return { email };
+        const data = await res.json();
+        return data
     }
     );
 
