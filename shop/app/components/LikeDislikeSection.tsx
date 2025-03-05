@@ -77,20 +77,30 @@ export default function LikeDislikeSection({
   };
 
   return (
-    <div className="my-4">
+    <div className="mt-4 flex gap-4">
       <button
-        className="text-xl text-yellow-600 mr-2 px-2 py-1"
         onClick={handleLike}
         disabled={userAlreadyLiked || userAlreadyDisliked}
+        className="w-20 h-20 border border-yellow-500 rounded flex flex-col items-center justify-center 
+                    disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100 transition-colors"
       >
-        👍 {localLikes}
+        <span className="text-xl text-yellow-500">
+          👍 {localLikes}
+        </span>
+        <span className="text-sm mt-1">좋아요</span>
       </button>
+
+
       <button
-        className="text-xl text-blue-600 px-2 py-1"
         onClick={handleDislike}
         disabled={userAlreadyLiked || userAlreadyDisliked}
+        className="w-20 h-20 border border-blue-500 rounded flex flex-col items-center justify-center
+                    disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100 transition-colors"
       >
-        😨 {localDislikes}
+        <span className="text-xl text-blue-500">
+          😨 {localDislikes}
+        </span>
+        <span className="text-sm mt-1">싫어요</span>
       </button>
     </div>
   );
