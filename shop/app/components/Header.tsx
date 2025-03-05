@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,31 +11,80 @@ export default function Header() {
   const dispatch = useDispatch<AppDispatch>();
   const { user } = useSelector((state: RootState) => state.auth);
 
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const handleLogout = () => {
     dispatch(logout());
   };
 
   return (
-    <header className=" mb-8 pb-2 shadow-lg">
-      <div className="flex justify-center items-center mt-12">
-        <Image src="/logo.png" width={300} height={64} alt="logo" />
+    <header className="mb-8 shadow-lg">
+      <div className="flex items-center justify-between p-4">
+        <div className="hidden md:block">
+          <Image src="/logo.png" width={220}  height={30}alt="logo" />
+        </div>
+
+        <div className="block md:hidden">
+          <Image src="/logo.png" width={180} height={38} alt="logo" />
+        </div>
+
+        <nav className="hidden md:flex space-x-6 text-lg">
+          <Link href="/lotion">보습제</Link>
+          <Link href="/pill">영양제</Link>
+          <Link href="/board">게시판</Link>
+          {user ? (
+            <button onClick={handleLogout} className="text-blue-500">
+              로그아웃
+            </button>
+          ) : (
+            <Link href="/auth/login" className="text-blue-500">
+              로그인
+            </Link>
+          )}
+        </nav>
+
+
+        <button
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          className="md:hidden text-2xl"
+        >
+
+          ☰
+        </button>
       </div>
 
-      <nav className="mt-9 mb-6 flex justify-center space-x-40 text-lg">
-        <Link href="/lotion">보습제</Link>
-        <Link href="/pill">영양제</Link>
-        <Link href="/board">게시판</Link>
-
-        {user ? (
-          <button onClick={handleLogout} className="text-blue-500">
-            로그아웃
-          </button>
-        ) : (
-          <Link href="/auth/login" className="text-blue-500">
-            로그인
+      {isMenuOpen && (
+        <nav className="flex flex-col items-center space-y-4 pb-4 md:hidden text-lg">
+          <Link href="/lotion" onClick={() => setIsMenuOpen(false)}>
+            보습제
           </Link>
-        )}
-      </nav>
+          <Link href="/pill" onClick={() => setIsMenuOpen(false)}>
+            영양제
+          </Link>
+          <Link href="/board" onClick={() => setIsMenuOpen(false)}>
+            게시판
+          </Link>
+          {user ? (
+            <button
+              onClick={() => {
+                handleLogout();
+                setIsMenuOpen(false);
+              }}
+              className="text-blue-500"
+            >
+              로그아웃
+            </button>
+          ) : (
+            <Link
+              href="/auth/login"
+              onClick={() => setIsMenuOpen(false)}
+              className="text-blue-500"
+            >
+              로그인
+            </Link>
+          )}
+        </nav>
+      )}
     </header>
   );
 }
