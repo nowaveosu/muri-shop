@@ -21,13 +21,18 @@ export default async function LotionDetailPage({
   if (!product) {
     return <div>존재하지 않는 상품입니다.</div>;
   }
+  const displayName =
+  product.isPrescription === "yes"
+  ? `${product.name} 💊`
+  : product.name;
+
 
   return (
-    // 1) 전체 컨테이너를 가운데 정렬 + 여백
+
     <div className="max-w-screen-lg mx-auto p-4">
-      {/* 2) md 이상에서 좌우 2컬럼, md 미만에서는 세로 레이아웃 */}
+
       <div className="flex flex-col md:flex-row items-center md:items-start md:justify-center gap-6">
-        {/* 왼쪽: 이미지 */}
+
         <div className="flex-shrink-0">
           <Image
             src={product.image}
@@ -39,9 +44,9 @@ export default async function LotionDetailPage({
           />
         </div>
 
-        {/* 오른쪽: 제품명 + 좋아요/싫어요 + 댓글 */}
+
         <div className="flex flex-col md:w-1/2">
-          <h1 className="text-2xl font-semibold mb-2">{product.name}</h1>
+          <h1 className="text-2xl font-semibold mb-2">{displayName}</h1>
 
           <LikeDislikeSection
             routePrefix="lotion"

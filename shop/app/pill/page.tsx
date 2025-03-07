@@ -1,6 +1,6 @@
 import { MongoClient } from "mongodb";
 import Link from "next/link";
-import Card from "../components/Card"; 
+import Card from "../components/Card";
 
 export const dynamic = "force-dynamic";
 
@@ -17,16 +17,23 @@ export default async function Pill() {
 
     return (
         <div className="flex flex-wrap gap-4 p-4 justify-center">
-        {pills.map((item) => (
+        {pills.map((item) => {
+            const displayName =
+            item.isPrescription === "yes"
+                ? `${item.name} 💊`
+                : item.name;
+
+            return (
             <Link key={item._id.toString()} href={`/pill/${item._id.toString()}`}>
-                <Card       
-                    productImg={item.image}            
-                    productName={item.name}             
-                    likes={item.likes}
-                    dislikes={item.dislikes}
-                />     
+                <Card
+                productImg={item.image}
+                productName={displayName}
+                likes={item.likes}
+                dislikes={item.dislikes}
+                />
             </Link>
-        ))}
+            );
+        })}
         </div>
     );
 }

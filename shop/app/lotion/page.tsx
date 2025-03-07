@@ -18,20 +18,23 @@ export default async function Lotion() {
 
   return (
     <div className="flex flex-wrap gap-4 p-4 justify-center ">
-      {lotions.map((item) => (
-        <Link
-          key = {item._id.toString()}
-          href = {`/lotion/${item._id.toString()}`}
-        >
-          <Card       
-            productImg={item.image}            
-            productName={item.name}             
-            likes={item.likes}
-            dislikes={item.dislikes}
-          />        
-        </Link>
+      {lotions.map((item) => {
+            const displayName =
+            item.isPrescription === "yes"
+                ? `${item.name} 💊`
+                : item.name;
 
-      ))}
+            return (
+            <Link key={item._id.toString()} href={`/lotion/${item._id.toString()}`}>
+                <Card
+                productImg={item.image}
+                productName={displayName}
+                likes={item.likes}
+                dislikes={item.dislikes}
+                />
+            </Link>
+            );
+        })}
     </div>
 
 );
