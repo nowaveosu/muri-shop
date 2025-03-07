@@ -3,6 +3,7 @@ import Card from "../components/Card";
 import { MongoClient } from "mongodb"
 import Link from "next/link";
 
+export const dynamic = "force-dynamic";
 
 export default async function Lotion() {
   const client = new MongoClient(process.env.MONGODB_URI as string);
@@ -32,5 +33,6 @@ export default async function Lotion() {
 
       ))}
     </div>
-    );
+
+);
   }
