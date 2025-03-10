@@ -23,8 +23,8 @@ export default function BoardDetail() {
         };
     }, [dispatch, boardId]);
 
-    if (status === "loading") return <div>로딩 중...</div>;
-    if (status === "error") return <div>에러: {errorMessage}</div>;
+    if (status === "loading") return <div className="ml-4">로딩 중...</div>;
+    if (status === "error") return <div className="ml-4">에러: {errorMessage}</div>;
     if (!detail) return <div>게시글이 존재하지 않거나 로딩 중입니다.</div>;
 
     return (

@@ -16,8 +16,8 @@ export default function BoardList() {
         dispatch(fetchBoardList());
     }, [dispatch]);
 
-    if (status === "loading") return <div>로딩 중...</div>;
-    if (status === "error") return <div>에러: {errorMessage}</div>;
+    if (status === "loading") return <div className="ml-4">로딩 중...</div>;
+    if (status === "error") return <div className="ml-4">에러: {errorMessage}</div>;
 
     return (
         <div className="p-4">
