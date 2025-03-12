@@ -21,14 +21,15 @@ export default function BoardList() {
 
     return (
         <div className="p-4">
-        <h2 className="text-2xl font-bold mb-4">게시판</h2>
-
-        <Link
-            href="/board/new"
-            className="bg-blue-500 text-white px-3 py-1 rounded-md"
-        >
-            새 글 작성
-        </Link>
+        <h2 className="flex justify-center text-2xl font-bold mb-4">게시판</h2>
+        <div className="text-right">
+            <Link
+                href="/board/new"
+                className="inline-block bg-blue-500 text-white px-3 py-1 rounded-md"
+                >
+                새 글 작성
+            </Link>
+        </div>
 
         <ul className="mt-4 space-y-2">
             {list.map((item) => (
