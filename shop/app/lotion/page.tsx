@@ -1,6 +1,5 @@
-
 import Card from "../components/Card";
-import { MongoClient } from "mongodb"
+import { MongoClient } from "mongodb";
 import Link from "next/link";
 
 export const dynamic = "force-dynamic";
@@ -12,30 +11,41 @@ export default async function Lotion() {
   const db = client.db("products");
   const collection = db.collection("lotion");
 
-  const lotions = await collection.find({type: "lotion"}).toArray();
-
+  const lotions = await collection.find({ type: "lotion" }).toArray();
   await client.close();
 
   return (
-    <div className="flex flex-wrap gap-4 p-4 justify-center ">
-      {lotions.map((item) => {
-            const displayName =
-            item.isPrescription === "yes"
-                ? `${item.name} 💊`
-                : item.name;
+    <div className="mx-auto w-full
+                    sm:w-[640px]
+                    md:w-[768px]
+                    lg:w-[1024px]
+                    ">
+      <div className="
+        grid 
+        grid-cols-1       
+        sm:grid-cols-2    
+        md:grid-cols-3    
+        lg:grid-cols-4
+        gap-8 
+        justify-items-center
+      ">
+        {lotions.map((item) => {
+          const displayName =
+            item.isPrescription === "yes" ? `${item.name} 💊` : item.name;
 
-            return (
+          return (
             <Link key={item._id.toString()} href={`/lotion/${item._id.toString()}`}>
-                <Card
+              <Card
                 productImg={item.image}
                 productName={displayName}
                 likes={item.likes}
                 dislikes={item.dislikes}
-                />
+              />
             </Link>
-            );
+          );
         })}
+      </div>
     </div>
 
-);
-  }
+  );
+}

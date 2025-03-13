@@ -16,24 +16,38 @@ export default async function Pill() {
     await client.close();
 
     return (
-        <div className="flex flex-wrap gap-4 p-4 justify-center">
-        {pills.map((item) => {
-            const displayName =
-            item.isPrescription === "yes"
-                ? `${item.name} 💊`
-                : item.name;
+        <div className="mx-auto w-full
+        sm:w-[640px]
+        md:w-[768px]
+        lg:w-[1024px]
+        ">
+            <div className="
+            grid 
+            grid-cols-1       
+            sm:grid-cols-2    
+            md:grid-cols-3    
+            lg:grid-cols-4
+            gap-8 
+            justify-items-center
+            ">
+                {pills.map((item) => {
+                    const displayName =
+                    item.isPrescription === "yes"
+                        ? `${item.name} 💊`
+                        : item.name;
 
-            return (
-            <Link key={item._id.toString()} href={`/pill/${item._id.toString()}`}>
-                <Card
-                productImg={item.image}
-                productName={displayName}
-                likes={item.likes}
-                dislikes={item.dislikes}
-                />
-            </Link>
-            );
-        })}
+                    return (
+                    <Link key={item._id.toString()} href={`/pill/${item._id.toString()}`}>
+                        <Card
+                        productImg={item.image}
+                        productName={displayName}
+                        likes={item.likes}
+                        dislikes={item.dislikes}
+                        />
+                    </Link>
+                    );
+                })}
+            </div>
         </div>
     );
 }
