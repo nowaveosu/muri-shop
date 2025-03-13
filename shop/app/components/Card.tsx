@@ -11,14 +11,14 @@ interface CardProps {
 
 export default function Card({productImg, productName, likes, dislikes}: CardProps) {
     return (
-        <div className="w-64 border border-gray-300 rounded-md shadow-sm p-4 flex flex-col items-center">
+        <div className="w-64 border  shadow-md rounded-md p-4 flex flex-col items-center">
 
-            <div className="w-full h-40 relative mb-3">
+            <div className=" h-40 relative mb-3">
                 <Image
                     src={productImg} 
                     alt={productName}
-                    fill
-                    style={{ objectFit: "cover" }}
+                    width={160}
+                    height={140}
                     className="rounded-md"
                 />
             </div>
