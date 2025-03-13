@@ -2,8 +2,6 @@ import { MongoClient } from "mongodb";
 import Link from "next/link";
 import Card from "../components/Card";
 
-export const dynamic = "force-dynamic";
-
 export default async function Pill() {
     const client = new MongoClient(process.env.MONGODB_URI as string);
     await client.connect();
