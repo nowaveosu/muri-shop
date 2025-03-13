@@ -38,7 +38,9 @@ export default function BoardDetail() {
         <p className="text-gray-600 text-sm mb-4">
             작성일: {new Date(detail.createdAt).toLocaleString()}
         </p>
-        <div className="border p-4 mb-6">{detail.content}</div>
+        <div className="border p-4 mb-6 whitespace-pre-line">
+            {detail.content}
+        </div>
 
 
         <CommentSection productId={boardId} />

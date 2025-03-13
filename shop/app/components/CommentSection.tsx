@@ -67,7 +67,7 @@ interface CommentSectionProps {
             {comments.map((comment) => (
                 <li key={comment._id} className="border-b pb-2">
                 <div className="font-medium">{comment.author}</div>
-                <div>{comment.content}</div>
+                <div className="whitespace-pre-line">{comment.content}</div>
                 <div className="text-sm text-gray-500">
                     {new Date(comment.createdAt).toLocaleString()}
                 </div>
