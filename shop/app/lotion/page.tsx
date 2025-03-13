@@ -38,6 +38,7 @@ export default async function Lotion() {
               <Card
                 productImg={item.image}
                 productName={displayName}
+                type={item.type}
                 likes={item.likes}
                 dislikes={item.dislikes}
               />

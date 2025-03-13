@@ -4,18 +4,19 @@ import Image from "next/image"
 interface CardProps {
     productImg: string;
     productName: string;
+    type: string;
     likes: number;
     dislikes: number;
 }
 
 
-export default function Card({productImg, productName, likes, dislikes}: CardProps) {
+export default function Card({productImg, productName, type, likes, dislikes}: CardProps) {
     return (
         <div className="w-64 border  shadow-md rounded-md p-4 flex flex-col items-center">
 
             <div className=" h-40 relative mb-3">
                 <Image
-                    src={productImg} 
+                    src={`/${type}/${productImg}`}
                     alt={productName}
                     width={160}
                     height={140}

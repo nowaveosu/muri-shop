@@ -35,7 +35,7 @@ export default async function PillDetailPage({
 
             <div className="flex-shrink-0">
             <Image
-                src={product.image}
+                src={`/${product.type}/${product.image}`}
                 alt={product.name}
                 width={300}
                 height={300}
