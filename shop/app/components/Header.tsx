@@ -31,6 +31,7 @@ export default function Header() {
         <nav className="hidden md:flex space-x-6 text-lg">
           <Link href="/lotion">보습제</Link>
           <Link href="/pill">영양제</Link>
+          <Link href="/medi">처방약</Link>
           <Link href="/board">게시판</Link>
           {user ? (
             <button onClick={handleLogout} className="text-blue-500">
@@ -60,6 +61,9 @@ export default function Header() {
           </Link>
           <Link href="/pill" onClick={() => setIsMenuOpen(false)}>
             영양제
+          </Link>
+          <Link href="/medi" onClick={() => setIsMenuOpen(false)}>
+            처방약
           </Link>
           <Link href="/board" onClick={() => setIsMenuOpen(false)}>
             게시판
