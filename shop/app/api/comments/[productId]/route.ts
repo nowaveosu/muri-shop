@@ -17,7 +17,7 @@ export async function GET(
     const productObjectId = new ObjectId(productId);
     const comments = await collection
         .find({ productId: productObjectId })
-        .sort({ createdAT: -1 })
+        .sort({ createdAt: -1 })
         .toArray();
     
     await client.close();
