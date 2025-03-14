@@ -24,7 +24,7 @@ export default function Card({productImg, productName, type, likes, dislikes}: C
                 />
             </div>
 
-        <h2 className="text-lg font-semibold mb-1">{productName}</h2>
+        <h2 className="text-lg mb-1">{productName}</h2>
         <div className="flex justify-between">
         <div className="text-yellow-600 mr-3">👍 {likes} </div>
         <div className="text-blue-600">😨 {dislikes}</div>
