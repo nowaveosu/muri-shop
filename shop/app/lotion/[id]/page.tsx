@@ -1,5 +1,3 @@
-"use client"
-
 import { MongoClient, ObjectId } from "mongodb";
 import Image from "next/image";
 import LikeDislikeSection from "@/app/components/LikeDislikeSection";
@@ -8,7 +6,6 @@ import dynamic from "next/dynamic";
 
 const LazyCommentSection = dynamic(() => import("@/app/components/CommentSection"), {
   loading: () => <p className="text-gray-500 mt-4">댓글을 불러오는 중...</p>,
-  ssr: false,
 });
 
 export default async function LotionDetailPage({
