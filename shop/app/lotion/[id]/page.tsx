@@ -37,8 +37,8 @@ export default async function LotionDetailPage({
             <Image
                 src={`/${product.type}/${product.image}`}
                 alt={product.name}
-                width={160}
-                height={140}
+                width={300}
+                height={300}
                 style={{ objectFit: "cover" }}
                 className="rounded-md"
             />

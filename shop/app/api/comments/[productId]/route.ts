@@ -43,7 +43,7 @@ export async function POST(
         productId: productObjectId,
         author: author || "익명",
         content,
-        cratedAt: new Date(),
+        createdAt: new Date(),
     };
 
     await collection.insertOne(newComment);
