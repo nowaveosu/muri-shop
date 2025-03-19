@@ -1,4 +1,4 @@
-import { MongoClient } from "mongodb";
+import { MongoClient, ObjectId } from "mongodb";
 import Link from "next/link";
 import Card from "../components/Card";
 
@@ -8,9 +8,18 @@ export default async function Pill() {
 
     const db = client.db("products");
     const collection = db.collection("pill");
+    const commentsCollection = db.collection("comments");
 
     const pills = await collection.find({ type: "pill" }).toArray();
 
+    for (const product of pills) {
+        const productId = product._id.toString();
+        const commentCount = await commentsCollection.countDocuments({
+            productId: new ObjectId(productId),
+        });
+        product.commentCount = commentCount;
+    }
+    
     await client.close();
 
     return (
@@ -42,6 +51,7 @@ export default async function Pill() {
                         type={item.type}
                         likes={item.likes}
                         dislikes={item.dislikes}
+                        commentCount={item.commentCount ?? 0}
                         />
                     </Link>
                     );
