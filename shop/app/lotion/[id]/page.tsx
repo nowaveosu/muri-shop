@@ -21,11 +21,6 @@ export default async function LotionDetailPage({
     if (!product) {
         return <div>존재하지 않는 상품입니다.</div>;
     }
-    const displayName =
-    product.isPrescription === "yes"
-    ? `${product.name} 💊`
-    : product.name;
-
 
     return (
 
@@ -46,7 +41,7 @@ export default async function LotionDetailPage({
 
 
             <div className="flex flex-col md:w-1/2">
-            <h1 className="text-2xl font-semibold mb-2">{displayName}</h1>
+            <h1 className="text-2xl font-semibold mb-2">{product.name}</h1>
 
             <LikeDislikeSection
                 routePrefix="lotion"

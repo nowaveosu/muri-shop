@@ -42,14 +42,11 @@ export default async function Lotion() {
         "
       >
         {lotions.map((item) => {
-          const displayName =
-            item.isPrescription === "yes" ? `${item.name} 💊` : item.name;
-
           return (
             <Link key={item._id.toString()} href={`/lotion/${item._id.toString()}`}>
               <Card
                 productImg={item.image}
-                productName={displayName}
+                productName={item.name}
                 type={item.type}
                 likes={item.likes ?? 0}
                 dislikes={item.dislikes ?? 0}

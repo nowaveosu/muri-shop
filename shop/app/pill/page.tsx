@@ -38,16 +38,11 @@ export default async function Pill() {
             justify-items-center
             ">
                 {pills.map((item) => {
-                    const displayName =
-                    item.isPrescription === "yes"
-                        ? `${item.name} 💊`
-                        : item.name;
-
                     return (
                     <Link key={item._id.toString()} href={`/pill/${item._id.toString()}`}>
                         <Card
                         productImg={item.image}
-                        productName={displayName}
+                        productName={item.name}
                         type={item.type}
                         likes={item.likes}
                         dislikes={item.dislikes}
