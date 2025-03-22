@@ -11,7 +11,7 @@ export async function POST(
     const { userId } = await request.json();
     if (!userId) {
         return NextResponse.json(
-        { message: "userId가 필요합니다." },
+        { message: "로그인 후 사용가능한 기능입니다" },
         { status: 400 }
         );
     }
