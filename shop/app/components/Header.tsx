@@ -19,9 +19,9 @@ export default function Header() {
 
   return (
     <header className="mb-8 shadow-lg">
-      <div className="flex items-center justify-between p-4">
+      <div className="flex items-center justify-between p-4 h-20">
         <div className="hidden md:block">
-          <Link href="/lotion"><Image src="/logo.png" width={220}  height={30}alt="logo" /></Link>
+          <Link href="/lotion"><Image src="/logo.png" width={270}  height={30}alt="logo" /></Link>
         </div>
 
         <div className="block md:hidden">
