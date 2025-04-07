@@ -12,7 +12,10 @@ export default function RootLayout({
       <body>
         <ReduxProvider>
           <Header />
-          {children}
+            <main className="pt-[120px]">
+              {children}
+            </main>
+          
         </ReduxProvider>
       </body>
     </html>

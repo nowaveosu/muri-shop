@@ -18,7 +18,7 @@ export default function Header() {
   };
 
   return (
-    <header className="mb-8 shadow-lg">
+    <header className="fixed top-0 left-0 w-full z-50 bg-white shadow-lg">
       <div className="flex items-center justify-between p-4 h-20">
         <div className="hidden md:block">
           <Link href="/lotion"><Image src="/logo.png" width={270}  height={30}alt="logo" /></Link>
