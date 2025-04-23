@@ -2,28 +2,33 @@ import { NextRequest, NextResponse } from "next/server";
 import { MongoClient } from "mongodb";
 
 const uri = process.env.MONGODB_URI as string;
+const client = new MongoClient(uri);
+const clientPromise: Promise<MongoClient> = client.connect();
 
 export async function GET(request: NextRequest) {
-    const client = new MongoClient(uri);
-    await client.connect();
-
-    const db = client.db("products");      
+    const client = await clientPromise;
+    const db = client.db("products");
     const collection = db.collection("board");
 
     const url = new URL(request.url);
     const page = parseInt(url.searchParams.get("page") || "1");
-    const limit = parseInt(url.searchParams.get("limit") || "5");
+    const limit = parseInt(url.searchParams.get("limit") || "10");
     const skip = (page - 1) * limit;
 
     const totalBoards = await collection.countDocuments();
     const boards = await collection
         .find({})
+        .project({
+            _id: 1,
+            author: 1,
+            title: 1,
+            category: 1,
+            createdAt: 1,
+        })
         .sort({ createdAt: -1 })
         .skip(skip)
         .limit(limit)
         .toArray();
-
-    await client.close();
 
     return NextResponse.json({
         boards,
@@ -38,7 +43,7 @@ export async function POST(request: NextRequest) {
 
     if (!title || !category || !content) {
         return NextResponse.json(
-            { message: "모든 필드를 입력하세요." },
+            { message: "모든 필드를 입력해야 합니다." },
             { status: 400 }
         );
     }
@@ -51,9 +56,7 @@ export async function POST(request: NextRequest) {
         );
     }
 
-    const client = new MongoClient(uri);
-    await client.connect();
-
+    const client = await clientPromise;
     const db = client.db("products");
     const collection = db.collection("board");
 
@@ -66,7 +69,6 @@ export async function POST(request: NextRequest) {
     };
 
     await collection.insertOne(newBoard);
-    await client.close();
 
     return NextResponse.json({ message: "게시글이 등록되었습니다." }, { status: 201 });
 }
