@@ -1,42 +1,53 @@
 import { NextRequest, NextResponse } from "next/server";
 import { MongoClient } from "mongodb";
 
-
 const uri = process.env.MONGODB_URI as string;
 
-export async function GET() {
+export async function GET(request: NextRequest) {
     const client = new MongoClient(uri);
     await client.connect();
 
     const db = client.db("products");      
     const collection = db.collection("board");
 
-    const allBoards = await collection
+    const url = new URL(request.url);
+    const page = parseInt(url.searchParams.get("page") || "1");
+    const limit = parseInt(url.searchParams.get("limit") || "5");
+    const skip = (page - 1) * limit;
+
+    const totalBoards = await collection.countDocuments();
+    const boards = await collection
         .find({})
         .sort({ createdAt: -1 })
+        .skip(skip)
+        .limit(limit)
         .toArray();
 
     await client.close();
 
-    return NextResponse.json(allBoards);
-    }
+    return NextResponse.json({
+        boards,
+        totalBoards,
+        currentPage: page,
+        totalPages: Math.ceil(totalBoards / limit),
+    });
+}
 
-    export async function POST(request: NextRequest) {
-    const { author,title, category, content } = await request.json();
+export async function POST(request: NextRequest) {
+    const { author, title, category, content } = await request.json();
 
     if (!title || !category || !content) {
         return NextResponse.json(
-        { message: "모든 필드를 입력하세요." },
-        { status: 400 }
+            { message: "모든 필드를 입력하세요." },
+            { status: 400 }
         );
     }
-
 
     const validCategories = ["꿀팁", "일반", "후기"];
     if (!validCategories.includes(category)) {
         return NextResponse.json(
-        { message: "유효하지 않은 머릿말입니다." },
-        { status: 400 }
+            { message: "유효하지 않은 머릿말입니다." },
+            { status: 400 }
         );
     }
 
