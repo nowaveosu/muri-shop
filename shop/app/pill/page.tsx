@@ -1,16 +1,30 @@
+import Card from "../components/Card";
 import { MongoClient, ObjectId } from "mongodb";
 import Link from "next/link";
-import Card from "../components/Card";
+
+export const revalidate = 60;
+
+const uri = process.env.MONGODB_URI as string;
+const client = new MongoClient(uri);
+const clientPromise: Promise<MongoClient> = client.connect();
 
 export default async function Pill() {
-    const client = new MongoClient(process.env.MONGODB_URI as string);
-    await client.connect();
-
+    const client = await clientPromise;
     const db = client.db("products");
     const collection = db.collection("pill");
     const commentsCollection = db.collection("comments");
 
-    const pills = await collection.find({ type: "pill" }).toArray();
+    const pills = await collection
+        .find({ type: "pill" })
+        .project({
+            _id: 1,
+            image: 1,
+            name: 1,
+            type: 1,
+            likes: 1,
+            dislikes: 1,
+        })
+        .toArray();
 
     for (const product of pills) {
         const productId = product._id.toString();
@@ -19,36 +33,37 @@ export default async function Pill() {
         });
         product.commentCount = commentCount;
     }
-    
-    await client.close();
 
     return (
-        <div className="mx-auto w-full
-        sm:w-[640px]
-        md:w-[768px]
-        lg:w-[1024px]
-        ">
-            <div className="
-            grid 
-            grid-cols-1       
-            sm:grid-cols-2    
-            md:grid-cols-3    
-            lg:grid-cols-4
-            gap-8 
-            justify-items-center
-            ">
+        <div
+            className="mx-auto w-full
+                sm:w-[640px]
+                md:w-[768px]
+                lg:w-[1024px]"
+        >
+            <div
+                className="
+                    grid 
+                    grid-cols-1       
+                    sm:grid-cols-2    
+                    md:grid-cols-3    
+                    lg:grid-cols-4
+                    gap-8 
+                    justify-items-center
+                "
+            >
                 {pills.map((item) => {
                     return (
-                    <Link key={item._id.toString()} href={`/pill/${item._id.toString()}`}>
-                        <Card
-                        productImg={item.image}
-                        productName={item.name}
-                        type={item.type}
-                        likes={item.likes}
-                        dislikes={item.dislikes}
-                        commentCount={item.commentCount ?? 0}
-                        />
-                    </Link>
+                        <Link key={item._id.toString()} href={`/pill/${item._id.toString()}`}>
+                            <Card
+                                productImg={item.image}
+                                productName={item.name}
+                                type={item.type}
+                                likes={item.likes ?? 0}
+                                dislikes={item.dislikes ?? 0}
+                                commentCount={item.commentCount ?? 0}
+                            />
+                        </Link>
                     );
                 })}
             </div>
