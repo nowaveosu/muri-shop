@@ -21,11 +21,11 @@ export default function Header() {
     <header className="fixed top-0 left-0 w-full z-50 bg-white shadow-lg">
       <div className="flex items-center justify-between p-4 h-20">
         <div className="hidden md:block">
-          <Link href="/lotion"><Image src="/logo.png" width={270}  height={30}alt="logo" /></Link>
+          <Link href="/"><Image src="/logo.png" width={270}  height={30}alt="logo" /></Link>
         </div>
 
         <div className="block md:hidden">
-          <Link href="/lotion"><Image src="/logo.png"  width={180} height={38} alt="logo" /></Link>
+          <Link href="/"><Image src="/logo.png"  width={180} height={38} alt="logo" /></Link>
         </div>
 
         <nav className="hidden md:flex space-x-6 text-lg">
