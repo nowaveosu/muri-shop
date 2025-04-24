@@ -4,7 +4,7 @@ export default function Home() {
     return (
         <div className="h-[480px] flex flex-col items-center justify-center p-4">
             <section className="text-center max-w-2xl mx-auto">
-                <h1 className="lg:text-4xl md:text-3xl sm:text-2xl font-bold text-gray-800 mb-4">
+                <h1 className="lg:text-4xl text-2xl font-bold text-gray-800 mb-4">
                     아토피 피부 고민, 여기서 해결하세요!
                 </h1>
                 <p className="text-lg text-gray-600 mb-6">
