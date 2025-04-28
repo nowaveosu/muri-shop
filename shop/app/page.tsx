@@ -19,7 +19,7 @@ export default function Home() {
             <div className="absolute inset-0 z-0"></div>
 
             <section className="text-center max-w-2xl mx-auto relative z-10">
-                <h1 className="lg:text-4xl text-2xl font-bold mb-4">
+                <h1 className="lg:text-4xl text-3xl font-bold mb-4">
                     아토피 피부 고민, 여기서 해결하세요!
                 </h1>
                 <p className="text-lg  mb-6">
@@ -42,7 +42,7 @@ export default function Home() {
 
             <section className="mt-12 text-center relative z-10">
                 <h2 className="text-2xl font-semibold mb-4">
-                    아토피 피부 관리 팁
+                    피부관리 팁 게시판
                 </h2>
                 <p className=" max-w-xl mx-auto">
                     아토피 피부는 꾸준한 보습과 올바른 제품 선택이 중요합니다. <br />
