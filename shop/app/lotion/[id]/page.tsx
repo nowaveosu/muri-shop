@@ -48,7 +48,7 @@ export default async function LotionDetailPage({
     );
 
     if (!product) {
-        return <div>존재하지 않는 상품입니다.</div>;
+        return <div>존재하지 않는 상품입니다</div>;
     }
 
     return (
