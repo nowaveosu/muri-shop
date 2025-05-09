@@ -45,7 +45,7 @@ export default function Home() {
                     피부관리 팁 게시판
                 </h2>
                 <p className=" max-w-xl mx-auto">
-                    아토피 피부는 꾸준한 보습과 올바른 제품 선택이 중요합니다. <br />
+                    아토피 피부는 건강한 생활습관과 꾸준한 보습이 중요합니다. <br />
                     커뮤니티에서 다른 사용자들의 경험을 통해 더 나은 관리법을 찾아보세요.
                 </p>
             </section>
