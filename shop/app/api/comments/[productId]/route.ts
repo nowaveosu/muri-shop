@@ -2,15 +2,15 @@ import { NextRequest, NextResponse } from "next/server";
 import { MongoClient, ObjectId } from "mongodb";
 
 const uri = process.env.MONGODB_URI as string;
+const client = new MongoClient(uri);
+const clientPromise: Promise<MongoClient> = client.connect();
 
 export async function GET(
     request: NextRequest,
-    {params} : {params: Promise<{ productId: string }> }
-){
-    const {productId} = await params;
-    const client = new MongoClient(uri);
-    await client.connect();
-
+    { params }: { params: Promise<{ productId: string }> }
+) {
+    const { productId } = await params;
+    const client = await clientPromise;
     const db = client.db("products");
     const collection = db.collection("comments");
 
@@ -19,21 +19,17 @@ export async function GET(
         .find({ productId: productObjectId })
         .sort({ createdAt: -1 })
         .toArray();
-    
-    await client.close();
 
     return NextResponse.json(comments);
 }
 
 export async function POST(
     request: NextRequest,
-    {params} : {params: Promise<{ productId: string }> }
-){
-    const {productId} = await params;
-    const {author, content} = await request.json();
-    const client = new MongoClient(uri);
-    await client.connect();
-
+    { params }: { params: Promise<{ productId: string }> }
+) {
+    const { productId } = await params;
+    const { author, content } = await request.json();
+    const client = await clientPromise;
     const db = client.db("products");
     const collection = db.collection("comments");
 
@@ -47,8 +43,6 @@ export async function POST(
     };
 
     await collection.insertOne(newComment);
-    await client.close();
 
-    return NextResponse.json({ message: "댓글 작성완료"}, {status: 201});
-
+    return NextResponse.json({ message: "댓글 작성완료" }, { status: 201 });
 }

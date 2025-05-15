@@ -5,20 +5,31 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchComments, addComment } from "../redux/features/commentsSlice";
 import type { RootState, AppDispatch } from "../redux/store";
 
-interface CommentSectionProps {
-    productId: string;
+interface Comment {
+    _id: string;
+    author: string;
+    content: string;
+    createdAt: string;
 }
 
-export default function CommentSection({ productId }: CommentSectionProps) {
+interface CommentSectionProps {
+    productId: string;
+    initialComments: Comment[];
+}
+
+export default function CommentSection({ productId, initialComments }: CommentSectionProps) {
     const [content, setContent] = useState("");
     const dispatch = useDispatch<AppDispatch>();
-    const comments = useSelector((state: RootState) => state.comments.items[productId] || []);
+    const comments = useSelector((state: RootState) => state.comments.items[productId] || initialComments);
     const status = useSelector((state: RootState) => state.comments.status);
     const user = useSelector((state: RootState) => state.auth.user);
 
     useEffect(() => {
-        dispatch(fetchComments(productId));
-    }, [dispatch, productId]);
+        // 초기 데이터가 없으면 Redux에서 가져옴
+        if (initialComments.length === 0) {
+            dispatch(fetchComments(productId));
+        }
+    }, [dispatch, productId, initialComments]);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();

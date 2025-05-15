@@ -30,6 +30,7 @@ export default async function LotionDetailPage({
     const client = await clientPromise;
     const db = client.db("products");
     const collection = db.collection("lotion");
+    const commentsCollection = db.collection("comments");
 
     const product = await collection.findOne(
         { _id: new ObjectId(id) },
@@ -47,8 +48,21 @@ export default async function LotionDetailPage({
         }
     );
 
+    const rawComments = await commentsCollection
+        .find({ productId: new ObjectId(id) })
+        .sort({ createdAt: -1 })
+        .toArray();
+
+    const initialComments = rawComments.map((comment) => ({
+        _id: comment._id.toString(),
+        productId: comment.productId.toString(),
+        author: comment.author,
+        content: comment.content,
+        createdAt: comment.createdAt.toISOString(),
+    }));
+
     if (!product) {
-        return <div>존재하지 않는 상품입니다</div>;
+        return <div>존재하지 않는 상품입니다.</div>;
     }
 
     return (
@@ -77,7 +91,7 @@ export default async function LotionDetailPage({
                         dislikedBy={product.dislikedBy ?? []}
                     />
 
-                    <CommentSection productId={id} />
+                    <CommentSection productId={id} initialComments={initialComments} />
                 </div>
             </div>
         </div>
