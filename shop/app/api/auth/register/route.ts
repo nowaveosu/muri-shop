@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
     const existing = await usersCollection.findOne({ email });
     if (existing) {
         await client.close();
-        return NextResponse.json({ message: "이미 존재하는 아이디입니다." }, { status: 400 });
+        return NextResponse.json({ message: "이미 존재하는 아이디입니다" }, { status: 400 });
     }
 
 
@@ -34,5 +34,5 @@ export async function POST(request: NextRequest) {
 
     await client.close();
 
-    return NextResponse.json({ message: "회원가입 성공" }, { status: 201 });
+    return NextResponse.json({ message: "회원가입 성공!" }, { status: 201 });
 }
