@@ -91,7 +91,7 @@ export default async function LotionDetailPage({
                         dislikedBy={product.dislikedBy ?? []}
                     />
 
-                    <CommentSection productId={id} initialComments={initialComments} />
+                    <CommentSection productId={id} />
                 </div>
             </div>
         </div>
