@@ -58,6 +58,7 @@ export default function NewBoardForm() {
                 <option value="꿀팁">꿀팁</option>
                 <option value="일반">일반</option>
                 <option value="후기">후기</option>
+                <option value="건의">건의</option>
             </select>
             </div>
             <div>

@@ -48,7 +48,7 @@ export async function POST(request: NextRequest) {
         );
     }
 
-    const validCategories = ["꿀팁", "일반", "후기"];
+    const validCategories = ["꿀팁", "일반", "후기", "건의"];
     if (!validCategories.includes(category)) {
         return NextResponse.json(
             { message: "유효하지 않은 머릿말입니다." },
